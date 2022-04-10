@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -15,7 +17,18 @@ class ProfileController extends Controller
      */
     public function edit()
     {
+        
+        // dd($users[0]->phone_no);
         return view('profile.edit');
+    }
+
+    public function show($id)
+    {
+        // $users = User::find($id);
+
+        // dd($users);
+
+        // return view('profile.edit', compact('users'));
     }
 
     /**
@@ -26,9 +39,22 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
-        if (auth()->user()->id == 1) {
-            return back()->withErrors(['not_allow_profile' => __('You are not allowed to change data for a default user.')]);
-        }
+        // if (auth()->user()->id == 1) {
+        //     return back()->withErrors(['not_allow_profile' => __('You are not allowed to change data for a default user.')]);
+        // }
+
+        $userDetails = UserDetail::where('user_id', auth()->user()->id)
+                        ->updateOrCreate([
+                            'user_id' => auth()->user()->id,], [
+                            'phone_no' => $request->phone,
+                            'age' => $request->age,
+                            'birth_place' => $request->birth_place,
+                            'education' => $request->education,
+                            'profession' => $request->profession,
+                            'workplace' => $request->workplace,
+                            'about' => $request->about,
+                        ]);
+        // dd($request);
 
         auth()->user()->update($request->all());
 
@@ -36,7 +62,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Change the password
+     * Change the password 
      *
      * @param  \App\Http\Requests\PasswordRequest  $request
      * @return \Illuminate\Http\RedirectResponse

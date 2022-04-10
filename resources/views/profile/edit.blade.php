@@ -109,6 +109,73 @@
                                             <strong>{{ $errors->first('email') }}</strong>
                                         </span>
                                     @endif
+                                </div>  
+                                <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="phone">{{ __('Phone No') }}</label><span> eg.(0123456789)</span>
+                                    <input type="tel" name="phone" id="phone" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('0123456789') }}" value="<?php echo '0'; ?>{{ old('phone_no', auth()->user()->userDetail->phone_no ?? '') }}" autofocus>
+                                    @if ($errors->has('phone'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('phone') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('age') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="age">{{ __('Age') }}</label>
+                                    <input type="number" name="age" id="age" class="form-control form-control-alternative{{ $errors->has('age') ? ' is-invalid' : '' }}" placeholder="{{ __('eg.25') }}" value="{{ old('age', auth()->user()->userDetail->age ?? '') }}" autofocus>
+                                    @if ($errors->has('age'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('age') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('birth_place') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="birth_place">{{ __('Birth Place') }}</label>
+                                    <input type="text" name="birth_place" id="birth_place" class="form-control form-control-alternative{{ $errors->has('birth_place') ? ' is-invalid' : '' }}" placeholder="{{ __('eg.Sabak Bernam,Selangor') }}" value="{{ old('birth_place', auth()->user()->userDetail->birth_place ?? '') }}" autofocus>
+
+                                    @if ($errors->has('birth_place'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('birth_place') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('education') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="education">{{ __('Education') }}</label>
+                                    <input type="text" name="education" id="education" class="form-control form-control-alternative{{ $errors->has('education') ? ' is-invalid' : '' }}" placeholder="{{ __('eg.Universiti Putra Malaysia') }}" value="{{ old('education', auth()->user()->userDetail->education ?? '') }}" autofocus>
+
+                                    @if ($errors->has('education'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('education') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('profession') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="profession">{{ __('Profession') }}</label>
+                                    <input type="text" name="profession" id="profession" class="form-control form-control-alternative{{ $errors->has('profession') ? ' is-invalid' : '' }}" placeholder="{{ __('eg.Software Engineer') }}" value="{{ old('profession', auth()->user()->userDetail->profession ?? '') }}" autofocus>
+
+                                    @if ($errors->has('profession'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('profession') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('workplace') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="workplace">{{ __('Workplace') }}</label>
+                                    <input type="text" name="workplace" id="workplace" class="form-control form-control-alternative{{ $errors->has('workplace') ? ' is-invalid' : '' }}" placeholder="{{ __('eg.Big Data Technology') }}" value="{{ old('workplace', auth()->user()->userDetail->workplace ?? '') }}" autofocus>
+
+                                    @if ($errors->has('workplace'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('workplace') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('about') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="about">{{ __('About Yourself') }}</label>
+                                    <textarea name="about" rows="4" cols="50" class="form-control form-control-alternative{{ $errors->has('about') ? ' is-invalid' : '' }}" placeholder="{{ __('eg.I like to eat') }}" autofocus>{{auth()->user()->userDetail->about ?? ''}}</textarea>
+                                    @if ($errors->has('about'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('about') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
 
                                 <div class="text-center">
