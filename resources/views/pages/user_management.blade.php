@@ -29,7 +29,7 @@
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg">
                                         </a>
                                         <div class="media-body">
                                             <span class="name mb-0 text-sm">{{$user->name}}</span>
@@ -81,9 +81,9 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item" href="#">View</a>
-                                            <a class="dropdown-item" href="#">Delete</a>
+                                            <a class="dropdown-item" href="{{ route('profile.show',$user->id) }}"><i class="ni ni-settings-gear-65"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="ni ni-zoom-split-in"></i>View</a>
+                                            <a class="dropdown-item" href="#"><i class="ni ni-fat-remove"></i>Delete</a>
                                         </div>
                                     </div>
                                 </td>

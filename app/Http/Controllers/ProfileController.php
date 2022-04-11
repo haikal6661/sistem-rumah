@@ -24,11 +24,11 @@ class ProfileController extends Controller
 
     public function show($id)
     {
-        // $users = User::find($id);
+        $users = User::find($id);
 
         // dd($users);
 
-        // return view('profile.edit', compact('users'));
+        return view('profile.show', compact('users'));
     }
 
     /**

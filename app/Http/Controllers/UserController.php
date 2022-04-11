@@ -31,4 +31,11 @@ class UserController extends Controller
 
         return view('pages.user_management', compact('users'));
     }
+
+    public function show($id)
+    {
+        $user = User::find($id);
+
+
+    }
 }

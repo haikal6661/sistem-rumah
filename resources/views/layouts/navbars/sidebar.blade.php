@@ -97,7 +97,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user-management') }}">
+                                <a class="nav-link" href="{{ route('user.view') }}">
                                     {{ __('User Management') }}
                                 </a>
                             </li>
