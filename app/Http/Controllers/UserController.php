@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Models\UserDetail;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -23,6 +24,7 @@ class UserController extends Controller
     public function view()
     {
         // dd($userDetails);
+        // auth()->user()->assignRole('User');
         $users = User::all();
 
         // dd($users[1]->userDetail->phone_no);
