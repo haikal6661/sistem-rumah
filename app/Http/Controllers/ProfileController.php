@@ -26,9 +26,18 @@ class ProfileController extends Controller
     {
         $users = User::find($id);
 
-        // dd($users);
+        // dd(auth()->user()->hasRole('Admin'));
+        if (auth()->user()->hasRole('Admin'))
+        {
+            return view('profile.show', compact('users'));
 
-        return view('profile.show', compact('users'));
+        }elseif (auth()->user()->id == $users->id){
+            
+            return view('profile.show', compact('users'));
+        }
+        
+        return redirect('user-management')->with('message', 'You don\'t have access!');
+        
     }
 
     /**

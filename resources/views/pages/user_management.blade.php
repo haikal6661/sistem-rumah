@@ -11,6 +11,14 @@
                 <div class="card-header border-0">
                     <h3 class="mb-0">Housemate</h3>
                 </div>
+                @if (session('message'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
@@ -80,11 +88,19 @@
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
+                                        @role('Admin')
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="{{ route('profile.show',$user->id) }}"><i class="ni ni-settings-gear-65"></i>Edit</a>
                                             <a class="dropdown-item" href="#"><i class="ni ni-zoom-split-in"></i>View</a>
                                             <a class="dropdown-item" href="#"><i class="ni ni-fat-remove"></i>Delete</a>
                                         </div>
+                                        @else
+                                        @if (auth()->user()->id == $user->id)
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                            <a class="dropdown-item" href="{{ route('profile.show',$user->id) }}"><i class="ni ni-settings-gear-65"></i>Edit</a>
+                                        </div>
+                                        @endif
+                                        @endrole
                                     </div>
                                 </td>
                             </tr>
