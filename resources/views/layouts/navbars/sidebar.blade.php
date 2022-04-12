@@ -85,8 +85,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Users') }}</span>
+                        <i class="ni ni-single-02"></i>
+                        <span class="nav-link-text">{{ __('Users') }}</span>
                     </a>
 
                     <div class="collapse show" id="navbar-examples">
@@ -99,6 +99,48 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.view') }}">
                                     {{ __('User Management') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples2">
+                        <i class="ni ni-money-coins"></i>
+                        <span class="nav-link-text">{{ __('Bills') }}</span>
+                    </a>
+
+                    <div class="collapse show" id="navbar-examples2">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ __('House Rent') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ __('Electricity Bills') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ __('Water Bills') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ __('Utility Bills') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ __('Wifi Bills') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ __('Coway Bills') }}
                                 </a>
                             </li>
                         </ul>
