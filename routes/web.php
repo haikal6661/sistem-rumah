@@ -36,5 +36,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
-
+Route::get('house-rent', ['as' => 'rent.list', 'uses' => 'App\Http\Controllers\HouseRentController@index']);
+Route::get('house-rent-add', ['as' => 'rent.add', 'uses' => 'App\Http\Controllers\HouseRentController@create']);
 
