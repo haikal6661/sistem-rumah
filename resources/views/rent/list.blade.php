@@ -29,6 +29,7 @@
                             <tr>
                                 <th scope="col" class="sort" data-sort="receipt">Reciept</th>
                                 <th scope="col" class="sort" data-sort="amount">Amount</th>
+                                <th scope="col" class="sort" data-sort="month">Month</th>
                                 <th scope="col" class="sort" data-sort="created_by">Created By</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col" class="sort" data-sort="outstanding">Outstanding Payment</th>
@@ -50,6 +51,9 @@
                                 </th>
                                 <td class="amount">
                                     RM{{$houseRent->amount ?? ' ---'}}
+                                </td>
+                                <td class="month">
+                                    {{$houseRent->month}}
                                 </td>
                                 <td class="created_by">
                                     {{$houseRent->created_by}}
@@ -73,9 +77,9 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#"><i class="ni ni-settings-gear-65"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="ni ni-zoom-split-in"></i>View</a>
+                                            <a class="dropdown-item" href="#"><i class="ni ni-fat-remove"></i>Delete</a>
                                         </div>
                                     </div>
                                 </td>
