@@ -13,8 +13,11 @@ class HouseRent extends Model
 
     protected $fillable = [
         'amount',
+        'user_id',
         'created_by',
         'bill_image',
+        'path',
+        'month',
     ];
 
     public function user()

@@ -38,4 +38,5 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('house-rent', ['as' => 'rent.list', 'uses' => 'App\Http\Controllers\HouseRentController@index']);
 Route::get('house-rent-add', ['as' => 'rent.add', 'uses' => 'App\Http\Controllers\HouseRentController@create']);
+Route::put('house-rent-add', ['as' => 'rent.store', 'uses' => 'App\Http\Controllers\HouseRentController@store']);
 

@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
+                        <form method="post" enctype="multipart/form-data" action="{{ route('rent.store') }}" autocomplete="off">
                             @csrf
                             @method('put')
 
@@ -92,7 +92,10 @@
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-image">{{ __('Image or Receipt') }}</label>
-                                    <input type="text" name="image" id="input-image" class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}" placeholder="{{ __('Image') }}" value="" required autofocus>
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input" id="customFileLang" lang="en">
+                                        <label class="custom-file-label" for="customFileLang">Select file</label>
+                                    </div>
 
                                     @if ($errors->has('image'))
                                         <span class="invalid-feedback" role="alert">
@@ -101,28 +104,42 @@
                                     @endif
                                 </div>
                                 <div class="form-group{{ $errors->has('Amount') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-amount">{{ __('Amount') }}</label>
-                                    <input type="text" name="amount" id="input-amount" class="form-control form-control-alternative{{ $errors->has('amount') ? ' is-invalid' : '' }}" placeholder="{{ __('Enter amount here') }}" value="" required autofocus>
+                                    <label class="form-control-label" for="input-amount">{{ __('Amount') }}</label><span>(RM)</span>
+                                    <input type="text" name="amount" id="input-amount" class="form-control form-control-alternative{{ $errors->has('amount') ? ' is-invalid' : '' }}" placeholder="{{ __('Enter amount here') }}" value="" autofocus>
 
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('amount'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                            <strong>{{ $errors->first('amount') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                                 <div class="form-group{{ $errors->has('Month') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-month">{{ __('Month') }}</label>
-                                    <input type="text" name="month" id="input-month" class="form-control form-control-alternative{{ $errors->has('month') ? ' is-invalid' : '' }}" placeholder="{{ __('Bill for what month?') }}" value="" required autofocus>
+                                    <select class="form-control" name="month">
+                                    <option>Select Month...</option>
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
+                                    </select>
 
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('month'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                            <strong>{{ $errors->first('month') }}</strong>
                                         </span>
                                     @endif
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                                    <button type="submit" class="btn btn-success mt-4">{{ __('Upload Bill') }}</button>
                                 </div>
                             </div>
                         </form>

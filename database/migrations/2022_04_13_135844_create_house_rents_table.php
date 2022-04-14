@@ -19,6 +19,8 @@ return new class extends Migration
             $table->double('amount')->nullable();
             $table->string('created_by')->nullable();
             $table->string('bill_image')->nullable();
+            $table->string('path')->nullable();
+            $table->string('month')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HouseRent;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HouseRentController extends Controller
@@ -14,7 +15,11 @@ class HouseRentController extends Controller
      */
     public function index()
     {
-        return view('rent.list');
+        $housesRent = HouseRent::all();
+
+        // dd($housesRent[0]->name);
+
+        return view('rent.list', compact('housesRent'));
     }
 
     /**
@@ -35,7 +40,26 @@ class HouseRentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $validateData = $request->validate([
+            'image' => 'image|mimes:jpg,png,jpeg,pdf|max:2048',
+        ]);
+        $name = $request->file('image')->getClientOriginalName();
+        $path = $request->file('image')->store('public/images/receipt');
+
+        
+
+        $save = new HouseRent;
+
+        $save->bill_image = $name;
+        $save->path = $path;
+        $save->user_id = auth()->user()->id;
+        $save->amount = $request->amount;
+        $save->month = $request->month;
+        $save->created_by = auth()->user()->name;
+        $save->save();
+
+        return back()->withStatus(__('Bill successfully uploaded.'));
     }
 
     /**
