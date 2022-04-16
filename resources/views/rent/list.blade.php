@@ -23,6 +23,14 @@
                     </button>
                 </div>
                 @endif
+                @if (session('status'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('status') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
@@ -45,7 +53,9 @@
                                             <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
                                         </a>
                                         <div class="media-body">
-                                            <span class="name mb-0 text-sm">{{$houseRent->bill_image}}</span>
+                                            <span class="name mb-0 text-sm"><a href="#" data-toggle="modal" data-target="#exampleModal-{{$houseRent->id}}">
+                                            {{$houseRent->bill_image}}
+                                            </a></span>
                                         </div>
                                     </div>
                                 </th>
@@ -79,11 +89,31 @@
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                         <a class="dropdown-item" href="#"><i class="ni ni-settings-gear-65"></i>Edit</a>
                                             <a class="dropdown-item" href="#"><i class="ni ni-zoom-split-in"></i>View</a>
-                                            <a class="dropdown-item" href="#"><i class="ni ni-fat-remove"></i>Delete</a>
+                                            <a class="dropdown-item" href="{{route('rent.delete',$houseRent->id)}}"><i class="ni ni-fat-remove"></i>Delete</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
+                            <!-- Modal -->
+                            <div class="modal fade bd-example-modal-lg" id="exampleModal-{{$houseRent->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{$houseRent->bill_image}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                <img alt="Image placeholder" class="img-center" src="{{asset('storage/images/receipt/'.$houseRent->bill_image)}}">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>
@@ -101,3 +131,12 @@
 <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
 @endpush
+
+<style>
+    .img-center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+    }
+</style>

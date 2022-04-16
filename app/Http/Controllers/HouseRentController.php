@@ -45,7 +45,7 @@ class HouseRentController extends Controller
             'image' => 'image|mimes:jpg,png,jpeg,pdf|max:2048',
         ]);
         $name = $request->file('image')->getClientOriginalName();
-        $path = $request->file('image')->store('public/images/receipt');
+        $path = $request->file('image')->storeAs('public/images/receipt',$name);
 
         
 
@@ -104,6 +104,8 @@ class HouseRentController extends Controller
      */
     public function destroy(HouseRent $houseRent)
     {
-        //
+        $houseRent->delete();
+
+        return back()->withStatus(__('Bill deleted successfully.'));
     }
 }
