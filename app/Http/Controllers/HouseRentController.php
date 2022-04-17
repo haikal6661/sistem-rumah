@@ -81,7 +81,9 @@ class HouseRentController extends Controller
      */
     public function edit(HouseRent $houseRent)
     {
-        //
+        $data = HouseRent::find($houseRent);
+
+        return view('rent.edit', compact('data'));
     }
 
     /**

@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::get('user-management', ['as' => 'user.view', 'uses' => 'App\Http\Controllers\UserController@view']);
 	Route::get('profile/{id}', ['as' => 'profile.show', 'uses' => 'App\Http\Controllers\ProfileController@show']);
+	Route::get('user-delete/{user}', ['as' => 'user.delete', 'uses' => 'App\Http\Controllers\UserController@destroy']);
 	Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
 	 Route::get('map', function () {return view('pages.maps');})->name('map');
 	 Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
@@ -39,5 +40,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('house-rent', ['as' => 'rent.list', 'uses' => 'App\Http\Controllers\HouseRentController@index']);
 Route::get('house-rent-add', ['as' => 'rent.add', 'uses' => 'App\Http\Controllers\HouseRentController@create']);
 Route::put('house-rent-add', ['as' => 'rent.store', 'uses' => 'App\Http\Controllers\HouseRentController@store']);
+Route::get('house-rent-edit/{houseRent}', ['as' => 'rent.edit', 'uses' => 'App\Http\Controllers\HouseRentController@edit']);
 Route::get('house-rent-delete/{houseRent}', ['as' => 'rent.delete', 'uses' => 'App\Http\Controllers\HouseRentController@destroy']);
 

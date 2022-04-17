@@ -87,9 +87,9 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#"><i class="ni ni-settings-gear-65"></i>Edit</a>
+                                        <a class="dropdown-item" href="{{route('rent.edit',$houseRent->id)}}"><i class="ni ni-settings-gear-65"></i>Edit</a>
                                             <a class="dropdown-item" href="#"><i class="ni ni-zoom-split-in"></i>View</a>
-                                            <a class="dropdown-item" href="{{route('rent.delete',$houseRent->id)}}"><i class="ni ni-fat-remove"></i>Delete</a>
+                                            <a class="dropdown-item" onClick="javascript: return confirm('Are you sure you want to delete this bill?');" href="{{route('rent.delete',$houseRent->id)}}"><i class="ni ni-fat-remove"></i>Delete</a>
                                         </div>
                                     </div>
                                 </td>

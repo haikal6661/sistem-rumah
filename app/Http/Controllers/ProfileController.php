@@ -40,6 +40,13 @@ class ProfileController extends Controller
         
     }
 
+    // public function modalView($id)
+    // {
+    //     $user = User::find($id);
+
+
+    // }
+
     /**
      * Update the profile
      *

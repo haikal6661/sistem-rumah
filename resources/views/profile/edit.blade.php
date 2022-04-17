@@ -47,19 +47,19 @@
                         </div>
                         <div class="text-center">
                             <h3>
-                                {{ auth()->user()->name }}<span class="font-weight-light">, {{auth()->user()->userDetail->age}}</span>
+                                {{ auth()->user()->name }}<span class="font-weight-light">, {{auth()->user()->userDetail->age ?? 'Age not set'}}</span>
                             </h3>
                             <div class="h5 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>{{auth()->user()->userDetail->birth_place}}
+                                <i class="ni location_pin mr-2"></i>{{auth()->user()->userDetail->birth_place ?? 'Birthplace not set'}}
                             </div>
                             <div class="h5 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>{{auth()->user()->userDetail->profession}} - {{auth()->user()->userDetail->workplace}}
+                                <i class="ni business_briefcase-24 mr-2"></i>{{auth()->user()->userDetail->profession ?? 'Profession not set'}} - {{auth()->user()->userDetail->workplace ?? 'Workplace not set'}}
                             </div>
                             <div>
-                                <i class="ni education_hat mr-2"></i>{{auth()->user()->userDetail->education}}
+                                <i class="ni education_hat mr-2"></i>{{auth()->user()->userDetail->education ?? 'Education not set'}}
                             </div>
                             <hr class="my-4" />
-                            <p>{{auth()->user()->userDetail->about}}</p>
+                            <p>{{auth()->user()->userDetail->about ?? 'About not set'}}</p>
                             <!-- <a href="#">{{ __('Show more') }}</a> -->
                         </div>
                     </div>

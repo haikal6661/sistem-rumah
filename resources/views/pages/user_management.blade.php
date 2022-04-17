@@ -19,6 +19,14 @@
                         </button>
                     </div>
                 @endif
+                @if (session('status'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('status') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
@@ -50,38 +58,10 @@
                                 <td class="budget">
                                     {{$user->email}}
                                 </td>
-                                <!-- <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i>
-                        <span class="status">pending</span>
-                      </span>
-                    </td> -->
                                 <td>
-                                    <!-- <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                            <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                            <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                            <img alt="Image placeholder" src="../assets/img/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                            <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
-                        </a>
-                    </div> -->
                                     {{$user->userDetail->age ?? ''}}
                                 </td>
                                 <td>
-                                    <!-- <div class="d-flex align-items-center">
-                        <span class="completion mr-2">60%</span>
-                        <div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>
-                            </div>
-                        </div>
-                    </div> -->
                                 </td>
                                 <td class="text-right">
                                     <div class="dropdown">
@@ -91,19 +71,95 @@
                                         @role('Admin')
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="{{ route('profile.show',$user->id) }}"><i class="ni ni-settings-gear-65"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="ni ni-zoom-split-in"></i>View</a>
-                                            <a class="dropdown-item" href="#"><i class="ni ni-fat-remove"></i>Delete</a>
+                                            <a class="dropdown-item" href="" data-toggle="modal" data-target="#exampleModal-{{$user->id}}"><i class="ni ni-zoom-split-in"></i>View</a>
+                                            <a class="dropdown-item" onClick="javascript: return confirm('Are you sure you want to delete this user?');" href="{{route('user.delete',$user->id)}}"><i class="ni ni-fat-remove"></i>Delete</a>
                                         </div>
                                         @else
                                         @if (auth()->user()->id == $user->id)
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="{{ route('profile.show',$user->id) }}"><i class="ni ni-settings-gear-65"></i>Edit</a>
+                                            <a class="dropdown-item" href="" data-toggle="modal" data-target="#exampleModal-{{$user->id}}"><i class="ni ni-zoom-split-in"></i>View</a>
                                         </div>
                                         @endif
                                         @endrole
                                     </div>
                                 </td>
                             </tr>
+                            <!-- Modal -->
+                            <div class="modal fade bd-example-modal" id="exampleModal-{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="exampleModalLabel">Housemate Profile</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                <div class="">
+                                        <div class="card card-profile shadow">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-3 order-lg-2">
+                                                    <div class="card-profile-image">
+                                                        <a href="#">
+                                                            <img src="{{ asset('argon') }}/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                                                <!-- <div class="d-flex justify-content-between">
+                                                    <a href="#" class="btn btn-sm btn-info mr-4">{{ __('Connect') }}</a>
+                                                    <a href="#" class="btn btn-sm btn-default float-right">{{ __('Message') }}</a>
+                                                </div> -->
+                                            </div>
+                                            <div class="card-body pt-0 pt-md-4">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                                            <div>
+                                                                <span class="heading">22</span>
+                                                                <span class="description">{{ __('Friends') }}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span class="heading">10</span>
+                                                                <span class="description">{{ __('Photos') }}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span class="heading">89</span>
+                                                                <span class="description">{{ __('Comments') }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h3>
+                                                        {{$user->name}}<span class="font-weight-light">, {{$user->userDetail->age ?? 'Age not set'}}</span>
+                                                    </h3>
+                                                    <div class="h5 font-weight-300">
+                                                        <i class="ni location_pin mr-2"></i>{{$user->userDetail->birth_place ?? 'Birthplace not set'}}
+                                                    </div>
+                                                    <div class="h5 mt-4">
+                                                        <i class="ni business_briefcase-24 mr-2"></i>{{$user->userDetail->profession ?? 'Profession not set'}} - {{$user->userDetail->workplace ?? 'Workplace not set'}}
+                                                    </div>
+                                                    <div>
+                                                        <i class="ni education_hat mr-2"></i>{{$user->userDetail->education ?? 'Education not set'}}
+                                                    </div>
+                                                    <hr class="my-4" />
+                                                    <p>{{$user->userDetail->about ?? 'About not set'}}</p>
+                                                    <!-- <a href="#">{{ __('Show more') }}</a> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>
