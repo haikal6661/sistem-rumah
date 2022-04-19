@@ -73,10 +73,10 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" enctype="multipart/form-data" action="{{ route('rent.store') }}" autocomplete="off">
+                        <form method="post" enctype="multipart/form-data" action="{{ route('rent.update') }}" autocomplete="off">
                             @csrf
                             @method('put')
-
+                            
                             <!-- <h6 class="heading-small text-muted mb-4">{{ __('Enter details here.') }}</h6> -->
                             
                             @if (session('status'))
@@ -89,12 +89,19 @@
                             @endif
 
                             @foreach ($data as $houseRent)
+                            <input type="hidden" value="{{$houseRent->id}}" name="id">
                             <div class="pl-lg-4">
-                                <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
+                                <div style="height: 400px;" class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-image">{{ __('Image or Receipt') }}</label>
+                                    @if ($houseRent->bill_image)
+                                        <img width="200px" class="img-preview img-fluid mb-3 d-block" src="{{asset('storage/images/receipt/'.$houseRent->bill_image)}}" alt="">
+                                    @else
+                                        <img width="200px" class="img-preview img-fluid mb-3 d-block" src="" alt="">
+                                    @endif
                                     <div class="custom-file">
-                                        <input type="file" name="image" class="custom-file-input" id="customFileLang" lang="en">
+                                        <input type="file" name="bill_image" class="custom-file-input" id="bill_image" lang="en" onchange="previewImage()">
                                         <label class="custom-file-label" for="customFileLang">Select file</label>
+                                        <!-- <img width="200px" src="{{asset('storage/images/receipt/'.$houseRent->bill_image)}}" alt="bill_image"> -->
                                     </div>
 
                                     @if ($errors->has('image'))
@@ -116,7 +123,7 @@
                                 <div class="form-group{{ $errors->has('Month') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-month">{{ __('Month') }}</label>
                                     <select class="form-control" name="month">
-                                    <option value="">{{ old('amount', $houseRent->month) }}</option>
+                                    <option value="{{ old('amount', $houseRent->month) }}">{{ old('amount', $houseRent->month) }}</option>
                                     <option value="January">January</option>
                                     <option value="February">February</option>
                                     <option value="March">March</option>
@@ -152,3 +159,21 @@
         @include('layouts.footers.auth')
     </div>
 @endsection
+
+<script>
+    
+        function previewImage(){
+            const image = document.querySelector('#bill_image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent){
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+
+</script>

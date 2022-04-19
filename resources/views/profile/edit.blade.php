@@ -88,8 +88,29 @@
                                 </div>
                             @endif
 
-
                             <div class="pl-lg-4">
+                                <div class="form-group{{ $errors->has('picture') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-picture">{{ __('Profile Picture') }}</label>
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-3 order-lg-2">
+                                            <div style="height: 200px;" class="">
+                                                <a href="#">
+                                                    <img width="200px" src="{{ old('picture', auth()->user()->name) }}"  class="rounded-circle">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="formFile" class="form-label"></label>
+                                    <input class="form-control" type="file" id="formFile">
+                                    </div>
+
+                                    @if ($errors->has('picture'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('picture') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
                                     <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}" required autofocus>

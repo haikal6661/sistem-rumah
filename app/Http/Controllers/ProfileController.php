@@ -55,9 +55,11 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
-        // if (auth()->user()->id == 1) {
-        //     return back()->withErrors(['not_allow_profile' => __('You are not allowed to change data for a default user.')]);
-        // }
+        $validateData = $request->validate([
+            'picture' => 'image|mimes:jpg,png,jpeg,pdf|max:2048',
+        ]);
+        $picture_name = $request->file('picture')->getClientOriginalName();
+        $path = $request->file('picture')->storeAs('public/images/profile_img',$picture_name);
 
         $userDetails = UserDetail::where('user_id', auth()->user()->id)
                         ->updateOrCreate([
@@ -69,6 +71,7 @@ class ProfileController extends Controller
                             'profession' => $request->profession,
                             'workplace' => $request->workplace,
                             'about' => $request->about,
+                            'picture' =>$request->picture_name,
                         ]);
         // dd($request);
 

@@ -19,6 +19,7 @@ class UserDetail extends Model
         'profession',
         'workplace',
         'about',
+        'picture',
     ];
 
     public function details()

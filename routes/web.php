@@ -41,5 +41,6 @@ Route::get('house-rent', ['as' => 'rent.list', 'uses' => 'App\Http\Controllers\H
 Route::get('house-rent-add', ['as' => 'rent.add', 'uses' => 'App\Http\Controllers\HouseRentController@create']);
 Route::put('house-rent-add', ['as' => 'rent.store', 'uses' => 'App\Http\Controllers\HouseRentController@store']);
 Route::get('house-rent-edit/{houseRent}', ['as' => 'rent.edit', 'uses' => 'App\Http\Controllers\HouseRentController@edit']);
+Route::put('house-rent-update', ['as' => 'rent.update', 'uses' => 'App\Http\Controllers\HouseRentController@update']);
 Route::get('house-rent-delete/{houseRent}', ['as' => 'rent.delete', 'uses' => 'App\Http\Controllers\HouseRentController@destroy']);
 

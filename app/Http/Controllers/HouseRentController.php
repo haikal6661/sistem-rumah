@@ -93,9 +93,28 @@ class HouseRentController extends Controller
      * @param  \App\Models\HouseRent  $houseRent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HouseRent $houseRent)
+    public function update(Request $request)
     {
-        //
+        // dd($request);
+        $update = HouseRent::find($request->id);
+
+        $validateData = $request->validate([
+            'bill_image' => 'image|mimes:jpg,png,jpeg,pdf|max:2048',
+        ]);
+
+        if ($request->file('bill_image')){
+            $bill_image = $request->file('bill_image')->getClientOriginalName();
+            $path = $request->file('bill_image')->storeAs('public/images/receipt',$bill_image);
+            $update->path = $path;
+            $update->bill_image = $bill_image;
+        }
+
+        $update->amount = $request->amount;
+        $update->month = $request->month;
+
+        $update->update();
+
+        return back()->withStatus(__('Bill updated successfully.'));
     }
 
     /**
