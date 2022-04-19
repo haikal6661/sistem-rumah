@@ -55,13 +55,20 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
+        // dd($request->file('picture')->getClientOriginalName());
+
         $validateData = $request->validate([
             'picture' => 'image|mimes:jpg,png,jpeg,pdf|max:2048',
         ]);
-        $picture_name = $request->file('picture')->getClientOriginalName();
-        $path = $request->file('picture')->storeAs('public/images/profile_img',$picture_name);
 
-        $userDetails = UserDetail::where('user_id', auth()->user()->id)
+        
+
+        if ($request->file('picture')){
+
+            $picture_name = $request->file('picture')->getClientOriginalName();
+            $path = $request->file('picture')->storeAs('public/images/profile_img',$picture_name);
+            
+            $userDetails = UserDetail::where('user_id', auth()->user()->id)
                         ->updateOrCreate([
                             'user_id' => auth()->user()->id,], [
                             'phone_no' => $request->phone,
@@ -71,11 +78,28 @@ class ProfileController extends Controller
                             'profession' => $request->profession,
                             'workplace' => $request->workplace,
                             'about' => $request->about,
-                            'picture' =>$request->picture_name,
+                            'picture' => $request->file('picture')->getClientOriginalName(),
+                        ]);
+
+                        auth()->user()->update($request->all());
+        }else {
+            $userDetails = UserDetail::where('user_id', auth()->user()->id)
+                        ->updateOrCreate([
+                            'user_id' => auth()->user()->id,], [
+                            'phone_no' => $request->phone,
+                            'age' => $request->age,
+                            'birth_place' => $request->birth_place,
+                            'education' => $request->education,
+                            'profession' => $request->profession,
+                            'workplace' => $request->workplace,
+                            'about' => $request->about,
                         ]);
         // dd($request);
 
         auth()->user()->update($request->all());
+        }
+        // $picture_name = $request->file('picture')->getClientOriginalName();
+        // $path = $request->file('picture')->storeAs('public/images/profile_img',$picture_name);
 
         return back()->withStatus(__('Profile successfully updated.'));
     }

@@ -45,7 +45,7 @@
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg">
+                                            <img alt="Image placeholder" style="height: 50px;" src="{{ asset('storage/images/profile_img/'. $user->userDetail->picture) }}">
                                         </a>
                                         <div class="media-body">
                                             <span class="name mb-0 text-sm">{{$user->name}}</span>
@@ -102,7 +102,7 @@
                                                 <div class="col-lg-3 order-lg-2">
                                                     <div class="card-profile-image">
                                                         <a href="#">
-                                                            <img src="{{ asset('argon') }}/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                                                            <img width="200px" style="height: 200px;" src="{{ asset('storage/images/profile_img/'. $user->userDetail->picture) }}" class="rounded-circle">
                                                         </a>
                                                     </div>
                                                 </div>

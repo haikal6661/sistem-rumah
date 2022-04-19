@@ -101,7 +101,6 @@
                                     <div class="custom-file">
                                         <input type="file" name="bill_image" class="custom-file-input" id="bill_image" lang="en" onchange="previewImage()">
                                         <label class="custom-file-label" for="customFileLang">Select file</label>
-                                        <!-- <img width="200px" src="{{asset('storage/images/receipt/'.$houseRent->bill_image)}}" alt="bill_image"> -->
                                     </div>
 
                                     @if ($errors->has('image'))

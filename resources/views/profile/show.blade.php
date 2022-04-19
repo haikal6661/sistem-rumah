@@ -15,7 +15,7 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                    <img src="{{ asset('argon') }}/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                                    <img width="200px" style="height: 200px;" src="{{ asset('storage/images/profile_img/'. $users->userDetail->picture) }}" class="rounded-circle">
                                 </a>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
+                        <form method="post" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
                             @csrf
                             @method('put')
 
@@ -90,6 +90,28 @@
 
 
                             <div class="pl-lg-4">
+                            <div class="form-group{{ $errors->has('picture') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-picture">{{ __('Profile Picture') }}</label>
+                                    @if (auth()->user()->userDetail->picture)
+                                        <img width="200px" style="height: 200px;" class="img-preview img-fluid mb-3 d-block rounded-circle" src="{{asset('storage/images/profile_img/'. $users->userDetail->picture)}}" alt="">
+                                    @else
+                                        <img width="200px" style="height: 200px;" class="img-preview img-fluid mb-3 d-block rounded-circle" src="" alt="">
+                                    @endif
+                                    <!-- <div class="custom-file">
+                                        <input type="file" name="picture" class="custom-file-input" id="picture" lang="en" onchange="previewImage()">
+                                        <label class="custom-file-label" for="customFileLang">Select file</label>
+                                    </div> -->
+                                    <div class="mb-3">
+                                    <label for="formFile" class="form-label"></label>
+                                    <input class="form-control" type="file" name="picture" id="picture" onchange="previewImage()">
+                                    </div>
+
+                                    @if ($errors->has('picture'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('picture') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
                                     <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', $users->name) }}" required autofocus>
@@ -238,3 +260,20 @@
         @include('layouts.footers.auth')
     </div>
 @endsection
+<script>
+    
+        function previewImage(){
+            const image = document.querySelector('#picture');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent){
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+
+</script>

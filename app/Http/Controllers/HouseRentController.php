@@ -70,7 +70,7 @@ class HouseRentController extends Controller
      */
     public function show(HouseRent $houseRent)
     {
-        //
+        return view('rent.view');
     }
 
     /**
