@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HouseRent;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HouseRentController extends Controller
 {
@@ -70,7 +71,16 @@ class HouseRentController extends Controller
      */
     public function show(HouseRent $houseRent)
     {
-        return view('rent.view');
+        // $data = DB::table('users')->join('user_details','user_details.user_id',"=",'user_id')
+        //         ->join('house_rents','house_rents.user_id',"=",'user_id')
+        //         ->get();
+        // $data = User::join('house_rents','house_rents.user_id',"=",'user_id')
+        //         ->join('user_details','user_details.user_id',"=",'user_details.id')
+        //         ->get();
+        $data = User::all();
+
+        // dd($data);
+        return view('rent.view', compact('data'));
     }
 
     /**
