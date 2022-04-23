@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('path')->nullable();
             $table->string('month')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

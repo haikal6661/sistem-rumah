@@ -21,7 +21,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header border-0">
-                    <h3 style="display: inline-block;" class="mb-0">House Rent Status For</h3>
+                    <h3 style="display: inline-block;" class="mb-0">House Rent Status For {{123}}</h3>
                     <!-- <span style="float: right;" class="btn-group">
                         <a class="btn btn-primary btn-sm" href="{{route('rent.add')}}" role="button">
                             <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>Add Bill</a>
@@ -62,12 +62,12 @@
                                             <img alt="Image placeholder" style="height: 50px;" src="{{ asset('storage/images/profile_img/') }}">
                                         </a>
                                         <div class="media-body">
-                                            <span class="name mb-0 text-sm">{{$row->name}}</span>
+                                            <span class="name mb-0 text-sm"></span>
                                         </div>
                                     </div>
                                 </th>
                                 <td>
-                                    {{$row->name}}
+                                    
                                 </td>
                             </tr>
                             @endforeach

@@ -74,12 +74,12 @@ class HouseRentController extends Controller
         // $data = DB::table('users')->join('user_details','user_details.user_id',"=",'user_id')
         //         ->join('house_rents','house_rents.user_id',"=",'user_id')
         //         ->get();
-        // $data = User::join('house_rents','house_rents.user_id',"=",'user_id')
-        //         ->join('user_details','user_details.user_id',"=",'user_details.id')
-        //         ->get();
-        $data = User::all();
+        $data = User::join('house_rents','house_rents.user_id',"=",'user_id')
+                ->join('user_details','user_details.user_id',"=",'user_details.id')
+                ->get();
+        // $data = HouseRent::find($houseRent)->first();
 
-        // dd($data);
+        dd($data);
         return view('rent.view', compact('data'));
     }
 
