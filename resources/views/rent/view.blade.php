@@ -59,15 +59,15 @@
                             <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder" style="height: 50px;" src="{{ asset('storage/images/profile_img/') }}">
+                                            <img alt="Image placeholder" style="height: 50px;" src="{{ asset('storage/images/profile_img/'.$row->userDetail->picture) }}">
                                         </a>
                                         <div class="media-body">
-                                            <span class="name mb-0 text-sm"></span>
+                                            <span class="name mb-0 text-sm">{{$row->name}}</span>
                                         </div>
                                     </div>
                                 </th>
                                 <td>
-                                    
+                                    RM
                                 </td>
                             </tr>
                             @endforeach

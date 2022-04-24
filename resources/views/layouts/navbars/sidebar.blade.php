@@ -89,7 +89,7 @@
                         <span class="nav-link-text">{{ __('Users') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse hide" id="navbar-examples">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('profile.edit') }}">
@@ -111,7 +111,7 @@
                         <span class="nav-link-text">{{ __('Bills') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples2">
+                    <div class="collapse hide" id="navbar-examples2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('rent.list') }}">
@@ -145,6 +145,11 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('icons') }}">
+                        <i class="ni ni-planet text-blue"></i> {{ __('Payment Status') }}
+                    </a>
                 </li>
 
                 <li class="nav-item">
