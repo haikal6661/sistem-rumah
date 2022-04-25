@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HouseRent;
+use App\Models\HouseRentPayment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -60,6 +61,17 @@ class HouseRentController extends Controller
         $save->created_by = auth()->user()->name;
         $save->save();
 
+        $data = HouseRent::select('amount')
+            ->where('id',3)->get();
+
+        $total = ($data[0]->amount)/5;
+
+        $houseRentPayment = HouseRentPayment::updateOrCreate([
+                'user_id' => auth()->user()->id,
+                'house_rent_id' => 3,
+                'amount_to_pay' => $total,
+            ]);
+
         return back()->withStatus(__('Bill successfully uploaded.'));
     }
 
@@ -71,14 +83,17 @@ class HouseRentController extends Controller
      */
     public function show(HouseRent $houseRent)
     {
+        $houseRent->id;
+        // dd($houseRent->id);
         // $data = DB::table('users')->join('user_details','user_details.user_id',"=",'user_id')
         //         ->join('house_rents','house_rents.user_id',"=",'user_id')
         //         ->get();
-        // $data = User::join('house_rents','house_rents.user_id',"=",'user_id')
-        //         ->join('user_details','user_details.user_id',"=",'user_details.id')
-        //         ->get();
+        $data = User::join('house_rents','house_rents.user_id',"=",'user_id')
+                ->join('user_details','user_details.user_id',"=",'id')
+                ->where('house_rents.id',$houseRent->id)
+                ->get();
         // $data = HouseRent::find($houseRent)->first();
-        $data = User::all();
+        // $data = User::all();
         // dd($data);
         return view('rent.view', compact('data'));
     }
