@@ -10,10 +10,9 @@ class HouseRentPaymentController extends Controller
 {
     public function index()
     {
-        $data = HouseRent::select('amount')
-            ->where('id',1)->get();
+        $data = HouseRent::select('amount')->latest('id','desc')->first();
 
-        $total = ($data[0]->amount)/5;
+        // $total = ($data[0]->amount)/5;
 
         // $houseRentPayment = HouseRentPayment::updateOrCreate([
         //     'user_id' => auth()->user()->id,
@@ -23,7 +22,7 @@ class HouseRentPaymentController extends Controller
 
         // auth()->user()->update($houseRentPayment->all());
 
-        // dd($data[0]->amount);
-        return view('test', compact('total'));
+        dd($data);
+        return view('test', compact('data'));
     }
 }

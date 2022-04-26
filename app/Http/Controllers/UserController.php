@@ -24,6 +24,7 @@ class UserController extends Controller
     public function view()
     {
         // dd($userDetails);
+        // $role = Role::create(['name' => 'User']);
         // auth()->user()->assignRole('User');
         $users = User::all();
 

@@ -61,15 +61,22 @@ class HouseRentController extends Controller
         $save->created_by = auth()->user()->name;
         $save->save();
 
-        $data = HouseRent::select('amount')
-            ->where('id',3)->get();
+        $data = HouseRent::select('amount')->latest('id','desc')->first();
+        $id = HouseRent::select('id')->latest('id','desc')->first();
 
-        $total = ($data[0]->amount)/5;
+        $amount = $data->amount;
+        $amount_to_pay = $amount/5;
+
+        // dd($data[0]->amount);
+
+        // $total = ($data[0]->amount)/5;
+
+        // dd($id->id);
 
         $houseRentPayment = HouseRentPayment::updateOrCreate([
                 'user_id' => auth()->user()->id,
-                'house_rent_id' => 3,
-                'amount_to_pay' => $total,
+                'house_rent_id' => $id->id,
+                'amount_to_pay' => $amount_to_pay,
             ]);
 
         return back()->withStatus(__('Bill successfully uploaded.'));
@@ -89,13 +96,15 @@ class HouseRentController extends Controller
         //         ->join('house_rents','house_rents.user_id',"=",'user_id')
         //         ->get();
         $data = User::join('house_rents','house_rents.user_id',"=",'user_id')
-                ->join('user_details','user_details.user_id',"=",'id')
                 ->where('house_rents.id',$houseRent->id)
                 ->get();
+
+        $data2 = HouseRentPayment::where('house_rent_id',$houseRent->id)->get();
+
         // $data = HouseRent::find($houseRent)->first();
         // $data = User::all();
-        // dd($data);
-        return view('rent.view', compact('data'));
+        // dd($data2);
+        return view('rent.view', ['data' => $data],['data2' => $data2]);
     }
 
     /**

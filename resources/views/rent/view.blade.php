@@ -21,7 +21,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header border-0">
-                    <h3 style="display: inline-block;" class="mb-0">House Rent Status For {{123}}</h3>
+                    <h3 style="display: inline-block;" class="mb-0">House Rent Status For {{$data[0]->month}}</h3>
                     <!-- <span style="float: right;" class="btn-group">
                         <a class="btn btn-primary btn-sm" href="{{route('rent.add')}}" role="button">
                             <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>Add Bill</a>
@@ -66,9 +66,11 @@
                                         </div>
                                     </div>
                                 </th>
+                                @foreach ($data2 as $row2)
                                 <td>
-                                    RM
+                                    RM{{$row2->amount_to_pay}}
                                 </td>
+                                @endforeach
                             </tr>
                             @endforeach
                         </tbody>
