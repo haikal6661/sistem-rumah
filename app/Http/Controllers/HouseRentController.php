@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HouseRent;
 use App\Models\HouseRentPayment;
 use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -99,12 +100,16 @@ class HouseRentController extends Controller
                 ->where('house_rents.id',$houseRent->id)
                 ->get();
 
+        $user_detail = UserDetail::all();
+
+        // dd($user_detail[0]->user->name);
+
         $data2 = HouseRentPayment::where('house_rent_id',$houseRent->id)->get();
 
         // $data = HouseRent::find($houseRent)->first();
         // $data = User::all();
         // dd($data2);
-        return view('rent.view', ['data' => $data],['data2' => $data2]);
+        return view('rent.view', ['data' => $data,'data2' => $data2,'user_detail' => $user_detail]);
     }
 
     /**

@@ -22,7 +22,7 @@ class UserDetail extends Model
         'picture',
     ];
 
-    public function details()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

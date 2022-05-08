@@ -55,14 +55,14 @@
                         </thead>
                         <tbody class="list">
                             <tr>
-                                @foreach ($data as $row)
+                            @foreach ($user_detail as $details)
                             <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder" style="height: 50px;" src="{{ asset('storage/images/profile_img/'.$row->userDetail->picture) }}">
+                                            <img alt="Image placeholder" style="height: 50px;" src="{{ asset('storage/images/profile_img/'.$details->picture) }}">
                                         </a>
                                         <div class="media-body">
-                                            <span class="name mb-0 text-sm">{{$row->name}}</span>
+                                            <span class="name mb-0 text-sm">{{$details->user->name}}</span>
                                         </div>
                                     </div>
                                 </th>
@@ -71,6 +71,12 @@
                                     RM{{$row2->amount_to_pay}}
                                 </td>
                                 @endforeach
+                                <td>
+
+                                </td>
+                                <td>
+                                    
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
